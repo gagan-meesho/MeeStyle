@@ -4,6 +4,8 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import {useState} from "react";
 import LinearProgressBar from "./animations/LinearProgressBar";
+import { useNavigate } from 'react-router-dom';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -19,17 +21,25 @@ const style = {
 };
 
 const HomePage = () =>{
+  const navigate = useNavigate();
+
   const [messages, setMessages] = useState([]);
   const [prompt, setPrompt] = useState('');
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = React.useState(false);
   const [selectedImage, setSelectedImage] =useState('')
+  const [imageFinal,setImageFinal]=useState('')  
   const handleInputChange = (event) => {
       setPrompt(event.target.value);
     };
-  const handleOpen = (image) => {
+  const handleOpen = (selectedImage) => {
     setOpen(true);
-    setSelectedImage(image);
+    console.log(selectedImage)
+    setImageFinal(selectedImage)
+    navigate('/instruction-place', {
+      state: { imageFinal },
+    });
+
   };
   const handleClose = () => {
     setOpen(false);
@@ -39,7 +49,7 @@ const HomePage = () =>{
     if (!prompt || loading) return;
     setLoading(true);
     const url = 'https://asia-southeast1-aiplatform.googleapis.com/v1/projects/meesho-datascience-prd-0622/locations/asia-southeast1/publishers/google/models/imagegeneration@005:predict';
-    const token = 'ya29.a0AXooCgvRGK0ZyP6SJZNBro14l-CuYl6E7J1Fn1bQQnlFFPEmF2ic6KjbjE_W45pyrnqgWQPZFjXT_8NzwILVwCNiypXz8Es4GLEQi6swjpKWJGjorHN9oTowUxOx_6RuB1eNPQod8SzuRBJ3Yaltr9iblwDGv9OjTaqGs7U8k-saCgYKAZ4SARASFQHGX2MiUT2NJuHvgWByEjLbFTSquw0178';
+    const token = 'ya29.a0AXooCguc35tE_is6ZKYHB0egaBhNyDWW_jT05K_1rWk5-BVQfF3hDy3sMT-CkZzJn0-4rojhalHBjb7hTWQ1Ftz3_MuhdIQC7ulwd9WePNiLFiPi0jv7kx40v6l0qkDzsnoFCMiA_mAajPNapIGDYwjQi5stqoTDRPUYgF63xRUaCgYKARMSARASFQHGX2MiX8BOStM3dNxWfDedWgDqPQ0178';
 
     const data = {
       "instances": [
@@ -147,7 +157,9 @@ const HomePage = () =>{
             <img
                 src={`data:image/png;base64,${selectedImage}`}
                 className='generated-image-modal'
-                onClick={handleOpen}
+                onClick={() => navigate('/instruction-place', {
+                  state: { selectedImage },
+                })}
             />
             <Button onClick={handleClose}>Close Child Modal</Button>
           </Box>

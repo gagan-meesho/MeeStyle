@@ -2,8 +2,13 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
 import './css/InstructionPage.css';
+import { useLocation } from 'react-router-dom';
+
 
 function LandingPage() {
+    const location = useLocation();
+  const { image } = location.state;
+  console.log(image)
   const [size, setSize] = useState('');
   const [material, setMaterial] = useState('');
   const [quantity, setQuantity] = useState('');
@@ -24,7 +29,11 @@ function LandingPage() {
     <>
     <Navbar/>
     <div className="landing-page">
-       
+    <img
+                              src={`data:image/png;base64,${image}`}
+                              className='generated-image'
+                             
+                          />
       <h1>Product Customization</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -69,7 +78,7 @@ function LandingPage() {
           <input type="file" id="logo" onChange={handleLogoUpload} />
           {logo && <img src={logo} alt="Uploaded Logo" className="logo-preview" />}
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" onClick={()=>{navigate}}>Submit</button>
       </form>
     </div>
     </>
