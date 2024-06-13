@@ -1,21 +1,50 @@
 import React from "react";
-import {MDBBtn, MDBInput} from "mdb-react-ui-kit";
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
 import {useState} from "react";
-const HomePage = () =>{
-  const [imageData, setImageData] = useState([]);
-  const [prompt, setPrompt] = useState(null);
+import LinearProgressBar from "./animations/LinearProgressBar";
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
 
-  const handlePrompt =(e)=>{
-    setPrompt(e.target.value);
-  }
+const HomePage = () =>{
+  const [messages, setMessages] = useState([]);
+  const [prompt, setPrompt] = useState('');
+  const [loading, setLoading] = useState(false)
+  const [open, setOpen] = React.useState(false);
+  const [selectedImage, setSelectedImage] =useState('')
+  const handleInputChange = (event) => {
+      setPrompt(event.target.value);
+    };
+  const handleOpen = (image) => {
+    setOpen(true);
+    setSelectedImage(image);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleClick = async () => {
+    if (!prompt || loading) return;
+    setLoading(true);
     const url = 'https://asia-southeast1-aiplatform.googleapis.com/v1/projects/meesho-datascience-prd-0622/locations/asia-southeast1/publishers/google/models/imagegeneration@005:predict';
-    const token = 'ya29.a0AXooCguywCStkrZLc1QJuM5GTG42PBVI_GInlozjzAp5pDWskV47KwGtUD_XfjvSwIENPegC9oKx7tsIsQf1N2BQG-WQAWNQEYbrM8MrDsPyglPfpEt-Oz6k-DkfTjBTa20b82HEd_ss4GhuXmmV3BUGU9Hwdv7Y0Sds8oxSoyAaCgYKAdwSARASFQHGX2MiZFZEM4yetVe9qo_hcmKCrg0178';
+    const token = 'ya29.a0AXooCgvRGK0ZyP6SJZNBro14l-CuYl6E7J1Fn1bQQnlFFPEmF2ic6KjbjE_W45pyrnqgWQPZFjXT_8NzwILVwCNiypXz8Es4GLEQi6swjpKWJGjorHN9oTowUxOx_6RuB1eNPQod8SzuRBJ3Yaltr9iblwDGv9OjTaqGs7U8k-saCgYKAZ4SARASFQHGX2MiUT2NJuHvgWByEjLbFTSquw0178';
 
     const data = {
       "instances": [
         {
-          "prompt": "t shirt for hackathon event for meesho"
+          "prompt": prompt
         }
       ],
       "parameters": {
@@ -40,36 +69,89 @@ const HomePage = () =>{
 
       const result = await response.json();
       const predictions = result.predictions;
+      const images = predictions.map(item => item.bytesBase64Encoded);
 
-      for(var i=0;i<predictions.length;i++){
-        console.log(predictions[i]);
-        console.log(predictions[i].bytesBase64Encoded);
-      }
-      setImageData(predictions);
+      setMessages(prevMessages => [
+        ...prevMessages,
+        { type: 'prompt', content: prompt },
+        { type: 'response', content: images }
+      ]);
+      setPrompt('');
+      setLoading(false);
     } catch (error) {
       console.error('Error making the API call:', error);
     }
   };
   return (
       <div>
-        <div>
-          {imageData.length > 0 && (
-              <div>
-                {imageData.map((base64String, index) => (
-                    <img
-                        key={index}
-                        src={`data:image/png;base64,${base64String.bytesBase64Encoded}`}
-                        alt={`Generated ${index}`}
-                        style={{margin: '10px'}}
-                    />
-                ))}
+        {loading && <LinearProgressBar/>}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '80vh',
+          overflowY: 'scroll'
+        }}>
+          {messages.map((message, index) => (
+              <div key={index} style={{
+                textAlign: message.type === 'prompt' ? 'right' : 'left',
+                margin: '10px'
+              }}>
+                {message.type === 'prompt' ? (
+                    <div style={{
+                      display: 'inline-block',
+                      backgroundColor: '#daf1da',
+                      padding: '10px',
+                      borderRadius: '10px'
+                    }}>
+                      {message.content}
+                    </div>
+                ) : (
+                    <div style= {{display:"flex", maxWidth:"100vw", flexWrap:'wrap', justifyContent:"space-evenly"}}>
+                      {message.content.map((base64String, idx) => (
+                          <img
+                              key={idx}
+                              src={`data:image/png;base64,${base64String}`}
+                              alt={`Generated ${index}-${idx}`}
+                              className='generated-image'
+                              onClick={handleOpen}
+                          />
+                      ))}
+                    </div>
+                )}
               </div>
-          )}
+          ))}
         </div>
-        <div>
-          <MDBInput wrapperClass='mb-4' placeholder={'Enter your prompt...'} id='form1' type='text' onChange={handlePrompt}/>
-          <MDBBtn className="mb-4 w-100" onClick={handleClick}>Submit</MDBBtn>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: '10px'
+        }}
+             className={`${loading ? 'no-disable' : 'disabled'}`}>
+          <input
+              type="text"
+              value={prompt}
+              onChange={handleInputChange}
+              style={{flexGrow: 1, marginRight: '10px'}}
+              placeholder="Describe your requirements..."
+
+          />
+          <button onClick={handleClick}>Send</button>
         </div>
+        <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="child-modal-title"
+            aria-describedby="child-modal-description"
+        >
+          <Box sx={{...style, width: 200}}>
+            <img
+                src={`data:image/png;base64,${selectedImage}`}
+                className='generated-image-modal'
+                onClick={handleOpen}
+            />
+            <Button onClick={handleClose}>Close Child Modal</Button>
+          </Box>
+        </Modal>
       </div>
   );
 };
