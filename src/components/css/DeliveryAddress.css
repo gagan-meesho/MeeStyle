@@ -1,0 +1,40 @@
+.delivery-address {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: 80%;
+    background-color: #fff;
+  }
+  
+  .delivery-address h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  .delivery-address p {
+    margin: 5px 0;
+    color: #333;
+  }
+  
+  .change-button {
+    background-color: transparent;
+    color: #800080; /* meesho brand color */
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    float: right;
+  }
+  
+  .change-button:hover {
+    text-decoration: underline;
+  }
+  
+  .address-info {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
