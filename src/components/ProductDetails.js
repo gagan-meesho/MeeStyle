@@ -26,7 +26,7 @@ function ProductDetails({size,material,image,quantity,logo,customInstructions}) 
        
         <button type="submit"className="edit-button" onClick={handleClick}>Place order request</button>
       </div>
-      <p>Sold by: ORRA ENTERPRISE<span>Free Delivery</span></p>
+      <p>Sold by: ORRA ENTERPRISE</p>
     </div>
   );
 }

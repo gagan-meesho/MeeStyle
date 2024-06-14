@@ -4,6 +4,7 @@ import OrderPlacePage from './components/OrderPlacePage';
 import SupplierPage from './components/SupplierPage';
 import MainPage from './components/MainPage'
 import InstructionPage from './components/InstructionsPage'
+import OrderRequestSuccesfulPage from './components/OrderRequestSuccesfulPage'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/order-place" element={<OrderPlacePage />} />
         <Route path="/instruction-place" element={<InstructionPage />} />
         <Route path='/supplier-page' element={<SupplierPage/>}/>
+        <Route path='/succesful' element={<OrderRequestSuccesfulPage/>}/>
       </Routes>
     
     

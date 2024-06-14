@@ -1,16 +1,21 @@
 .product-details {
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 16px;
+  position: relative;
+  padding: 10px;
   max-width: 400px;
-  margin: 20px auto;
+  margin-left: 20px auto;
   font-family: Arial, sans-serif;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  bottom:170px;
+  left:300px;
+  
 }
 
 .product-details h2 {
   font-size: 24px;
   margin-bottom: 16px;
+
   color: #333;
 }
 
@@ -41,7 +46,7 @@
 }
 
 .edit-button {
-  background-color: #28a745;
+  background-color: #800080;
   color: #fff;
   border: none;
   padding: 10px 16px;
@@ -52,7 +57,7 @@
 }
 
 .edit-button:hover {
-  background-color: #218838;
+  background-color: #800080;
 }
 
 .sold-by {

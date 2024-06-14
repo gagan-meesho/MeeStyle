@@ -1,26 +1,24 @@
 .paragraph-container {
-  padding: 20px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  text-align: center; /* Center the content */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 400px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  bottom:150px;
+  right:50px;
 }
 
-.paragraph-container p {
-  margin: 0 0 10px 0;
-  font-size: 16px;
+.paragraph-container h4 {
+  font-size: 20px;
+  margin-bottom: 12px;
   color: #333;
 }
 
-.paragraph-container button {
-  padding: 5px 10px; /* Make the button smaller */
-  font-size: 14px; /* Make the button text smaller */
-  color: #800080;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px; /* Add some space between the paragraph and the button */
-}
-
-.paragraph-container button:hover {
-  background-color: #0056b3;
+.paragraph-container p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
 }

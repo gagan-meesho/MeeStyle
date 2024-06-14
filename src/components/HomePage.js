@@ -47,8 +47,13 @@ const HomePage = () =>{
     if (!prompt || loading) return;
     setLoading(true);
     setPrompt('')
+    setMessages(prevMessages => [
+      ...prevMessages,
+      { type: 'prompt', content: prompt }
+    ]);
+   
     const url = 'https://asia-southeast1-aiplatform.googleapis.com/v1/projects/meesho-datascience-prd-0622/locations/asia-southeast1/publishers/google/models/imagegeneration@005:predict';
-    const token = 'ya29.a0AXooCgurYvhgXk1NnmgRceSEpT2-ul7GLgrvBAQ13hFj5ravomS-dullU5IM1e4J5AnPnfmrD0O28SdD-6cTKDu9vKOZuMJ8Uzi9XbBEUAENr_plwVWYG2kw0nKVUsufceJaoR6A8LIU07Qic36CBc21IAO3B-mY9HzTWdN7kfMaCgYKAbASARASFQHGX2MiWXLX_wQw2SD8-yQ6kKoaDw0178';
+    const token = 'ya29.a0AXooCgsYvHFtImsmykQ6xhfhZ_IoHGbfi6EytsqS2_eGqD8V14l1GrqX_1EzOeEW61FJBXfMBOIxj2YzRfUd0eKqUDgrw-Bht_8WHKsboppFrCkvHUaLnSIVfmh7_kEHyxGj3R9lWFNfltgFyTTGcu52FbssW_E0_6gW_Ri21KUaCgYKAUoSARASFQHGX2MiJ2BI-V8A7vfPtUvb0nqm_w0178';
 
     const data = {
       "instances": [
@@ -82,7 +87,6 @@ const HomePage = () =>{
 
       setMessages(prevMessages => [
         ...prevMessages,
-        { type: 'prompt', content: prompt },
         { type: 'response', content: images }
       ]);
       setPrompt('');
