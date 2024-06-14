@@ -8,7 +8,6 @@ import { useLocation } from 'react-router-dom';
 function OrderPlacePage() {
   const location=useLocation()
   const { size, material, quantity, logo, customInstructions,image } = location.state || {};
-  console.log(size)
   return (
     <div className="app">
       <h1 className="header">meesho</h1>

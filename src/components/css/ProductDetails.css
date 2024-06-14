@@ -1,91 +1,68 @@
 .product-details {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 10px;
-    width: 80%;
-    background-color: #fff;
-  }
-  
-  .product-details h2 {
-    margin-bottom: 15px;
-    font-size: 20px;
-    font-weight: 600;
-  }
-  
-  .estimated-delivery {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    color: #333;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-  }
-  
-  .estimated-delivery::before {
-    content: "🚚";
-    margin-right: 8px;
-  }
-  
-  .product-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-  
-  }
-  
-  .product-image {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    margin-right: 20px;
-  }
-  
-  .product-description {
-   width: 70%;
-  }
-  
-  .product-description p {
-    margin: 5px 0;
-    color: #333;
-  }
-  
-  .product-description p:first-child {
-    font-weight: 600;
-    font-size: 16px;
-  }
-  
-  .product-description p:nth-child(2) {
-    font-size: 16px;
-    font-weight: 500;
-  }
-  
-  .edit-button {
-    background-color: transparent;
-    color: #800080; /* meesho brand color */
-    border: none;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    width:10%
-  }
-  
-  .edit-button:hover {
-    text-decoration: underline;
-  }
-  
-  .product-details p {
-    margin: 5px 0;
-  }
-  
-  .product-details p:last-child {
-    display: flex;
-    justify-content: space-between;
-    font-weight: 600;
-    color: #333;
-  }
-  
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 400px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-details h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.estimated-delivery {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+.product-description p {
+  margin: 4px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.edit-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-button:hover {
+  background-color: #218838;
+}
+
+.sold-by {
+  font-size: 14px;
+  color: #333;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.free-delivery {
+  color: #28a745;
+  font-weight: bold;
+}
