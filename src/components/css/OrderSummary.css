@@ -1,56 +1,26 @@
-.order-summary {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 10px;
-    width: 80%;
-    background-color: #fff;
-    text-align: right;
-  }
-  
-  .order-summary h2 {
-    margin-bottom: 15px;
-    font-size: 20px;
-    font-weight: 600;
-  }
-  
-  .price-details {
-    margin-bottom: 20px;
-  }
-  
-  .price-details p {
-    display: flex;
-    justify-content: space-between;
-    margin: 5px 0;
-    color: #333;
-    font-size: 16px;
-  }
-  
-  .continue-button {
-    background-color: #800080; /* meesho brand color */
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .continue-button:hover {
-    background-color: #660066; /* Darker shade of meesho brand color */
-  }
-  
-  .meessho-safe {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    color: #333;
-  }
-  
-  .meessho-safe img {
-    margin-right: 10px;
-  }
-  
+.paragraph-container {
+  padding: 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  text-align: center; /* Center the content */
+}
+
+.paragraph-container p {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.paragraph-container button {
+  padding: 5px 10px; /* Make the button smaller */
+  font-size: 14px; /* Make the button text smaller */
+  color: #800080;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px; /* Add some space between the paragraph and the button */
+}
+
+.paragraph-container button:hover {
+  background-color: #0056b3;
+}

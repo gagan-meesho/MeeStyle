@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Navbar from './Navbar';
 import './css/InstructionPage.css';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function LandingPage() {
@@ -15,6 +16,7 @@ function LandingPage() {
   const [quantity, setQuantity] = useState('');
   const [customInstructions,setCustomInstructions]=useState('')
   const [logo, setLogo] = useState(null);
+  const navigate = useNavigate();
 
   const handleLogoUpload = (event) => {
     setLogo(URL.createObjectURL(event.target.files[0]));
@@ -23,7 +25,10 @@ function LandingPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Handle form submission
-    console.log({ size, material, quantity, logo });
+    console.log( customInstructions);
+    navigate('/order-place', {
+      state: { size, material, quantity, logo, customInstructions,image },
+    });
   };
 
   return (

@@ -3,8 +3,11 @@ import React from 'react';
 import Navbar from './Navbar';
 import './css/SupplierPage.css';
 import {useState} from "react";
+import { useLocation } from 'react-router-dom';
 
 function SupplierPage() {
+  const location=useLocation()
+  const { size, material, quantity, logo, customInstructions,image } = location.state || {};
   const [prompt, setPrompt] = useState('');
   const handleInputChange = (event) => {
     setPrompt(event.target.value);
@@ -14,36 +17,28 @@ function SupplierPage() {
     
       
   };
-  return (
+  return (<>
+    <Navbar/>
     <div className="product-page">
-<Navbar/>
+
      
       <div className="main-content">
         <div className="product-image">
-          <img src="your-image-url.jpg" alt="Product" />
+          <img src={image} alt="Product" />
         </div>
         <div className="product-details">
           <h1>Meesho | Supplier Panel</h1>
-          <p>₹315</p>
+         
           <p>Free Delivery</p>
           <div className="select-size">
-            <h2>Select Size</h2>
-            <div className="size-options">
-              <span className="size-option">Free Size</span>
-            </div>
-            <p className="no-size">No sizes available, try similar products</p>
+            <h2>Size: {size}</h2>
+            <h2>Material: {material}</h2>
+            <h2>Quantity: {quantity}</h2>
+            <h2>Country of Origin: India</h2>
+            <h2>Ideal for Unisex</h2>
+          
           </div>
-          <div className="product-info">
-            <h2>Product Details</h2>
-            <p>Name: Meesho | Supplier Panel</p>
-            <p>Capacity: 250g</p>
-            <p>Ideal For: Unisex</p>
-            <p>Ingredients: Lavender</p>
-            <p>Shelf life (Best Before): 24 Months</p>
-            <p>Net Quantity (N): 1</p>
-            <p>Country of Origin: India</p>
-          </div>
-
+          
           <div className="bid">
            
             <input
@@ -59,6 +54,7 @@ function SupplierPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

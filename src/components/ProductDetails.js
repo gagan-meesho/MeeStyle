@@ -1,7 +1,14 @@
 import React from 'react';
 import './css/ProductDetails.css';
+import { useNavigate } from 'react-router-dom';
 
-function ProductDetails() {
+function ProductDetails({size,material,image,quantity,logo,customInstructions}) {
+  const navigate=useNavigate();
+  const handleClick=()=>{
+  navigate('/supplier-page', {
+    state: { size, material, quantity, logo, customInstructions,image },
+  });
+}
   return (
     <div className="product-details">
       <h2>Product Details</h2>
@@ -9,14 +16,15 @@ function ProductDetails() {
         Estimated Delivery by Saturday, 16th J  un
       </div>
       <div className="product-info">
-        <img src="your-image-url.jpg" alt="Product" className="product-image" />
+        <img src={image} alt="Product" className="product-image" />
         <div className="product-description">
-          <p>Myra Petite Women Kurta Sets</p>
-          <p>₹362</p>
-          <p>All issue easy returns</p>
-          <p>Size: M ・ Qty: 1</p>
+          <p>Your Custom Product</p>
+          
+          <p>Material: {material}</p>
+          <p>Size: {size} ・ Qty: {quantity}</p>
         </div>
-        <button className="edit-button">EDIT</button>
+       
+        <button type="submit"className="edit-button" onClick={handleClick}>Place order request</button>
       </div>
       <p>Sold by: ORRA ENTERPRISE<span>Free Delivery</span></p>
     </div>
